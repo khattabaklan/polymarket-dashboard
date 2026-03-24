@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>📊 Polymarket Paper Trading</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="refresh" content="30">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { 
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+      color: #fff;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .container { max-width: 600px; margin: 0 auto; }
+    h1 { 
+      text-align: center; 
+      margin-bottom: 10px;
+      font-size: 24px;
+    }
+    .subtitle { text-align: center; color: #888; margin-bottom: 30px; font-size: 14px; }
+    .paper-badge {
+      background: #f39c12;
+      color: #000;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: bold;
+      margin-left: 10px;
+    }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-bottom: 20px; }
+    @media (max-width: 500px) { .grid { grid-template-columns: 1fr; } }
+    .card {
+      background: rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 20px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+    .card.full { grid-column: 1 / -1; }
+    .card-label { font-size: 12px; color: #888; text-transform: uppercase; letter-spacing: 1px; }
+    .card-value { font-size: 32px; font-weight: bold; margin-top: 5px; }
+    .card-value.positive { color: #00ff88; }
+    .card-value.negative { color: #ff4444; }
+    .card-value.neutral { color: #fff; }
+    .status-dot { 
+      display: inline-block; 
+      width: 12px; 
+      height: 12px; 
+      border-radius: 50%; 
+      margin-right: 8px;
+      animation: pulse 2s infinite;
+    }
+    .status-dot.online { background: #00ff88; box-shadow: 0 0 10px #00ff88; }
+    .status-dot.offline { background: #ff4444; animation: none; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    .trades { max-height: 300px; overflow-y: auto; }
+    .trade { 
+      padding: 12px; 
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .trade.win { border-left: 3px solid #00ff88; }
+    .trade.loss { border-left: 3px solid #ff4444; }
+    .trade.pending { border-left: 3px solid #f39c12; }
+    .trade-info { font-size: 14px; }
+    .trade-result { font-weight: bold; }
+    .trade-result.win { color: #00ff88; }
+    .trade-result.loss { color: #ff4444; }
+    .trade-result.pending { color: #f39c12; }
+    .updated { text-align: center; color: #666; font-size: 12px; margin-top: 20px; }
+    .error { text-align: center; padding: 40px; color: #ff4444; }
+    .loading { text-align: center; padding: 40px; color: #888; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>📊 Polymarket Bot<span class="paper-badge">PAPER</span></h1>
+    <div class="subtitle">Live Paper Trading Dashboard</div>
+    
+    <div id="content">
+      <div class="loading">Loading data...</div>
+    </div>
+    
+    <div class="updated">Auto-refreshes every 30s • Last update: <span id="lastUpdate">--</span></div>
+  </div>
+  
+  <script>
+    const stateUrl = './state.json?' + Date.now();
+    
+    async function load() {
+      try {
+        const res = await fetch(stateUrl);
+        if (!res.ok) throw new Error('No data yet');
+        const data = await res.json();
+        render(data);
+      } catch (e) {
+        document.getElementById('content').innerHTML = '<div class="error">Waiting for first data sync...<br><small>Bot is running, data syncs every 2 minutes</small></div>';
+      }
+      document.getElementById('lastUpdate').textContent = new Date().toLocaleTimeString();
+    }
+    
+    function render(data) {
+      const pnl = data.pnl || 0;
+      const total = (data.wins || 0) + (data.losses || 0);
+      const pct = total > 0 ? Math.round((data.wins / total) * 100) : 0;
+      const runtime = data.startTime ? Math.floor((Date.now() - data.startTime) / 60000) : 0;
+      const hrs = Math.floor(runtime / 60);
+      const mins = runtime % 60;
+      
+      let tradesHtml = '<div style="color: #666; padding: 20px; text-align: center;">No trades yet</div>';
+      
+      const allTrades = [
+        ...(data.positions || []).map(p => ({...p, pending: true})),
+        ...(data.trades || []).slice(-15).reverse()
+      ];
+      
+      if (allTrades.length > 0) {
+        tradesHtml = allTrades.map(t => {
+          const cls = t.pending ? 'pending' : (t.won ? 'win' : 'loss');
+          const label = t.pending ? '⏳ OPEN' : (t.won ? '✅ WIN' : '❌ LOSS');
+          const amount = t.pending ? '-$' + (t.cost || 0).toFixed(2) : 
+                        (t.won ? '+$' + (t.profit || 0).toFixed(2) : '-$' + (t.cost || 0).toFixed(2));
+          const title = t.direction || t.marketTitle?.slice(0,25) || 'Trade';
+          return '<div class="trade ' + cls + '"><span class="trade-info">' + title + '</span><span class="trade-result ' + cls + '">' + label + ' ' + amount + '</span></div>';
+        }).join('');
+      }
+      
+      document.getElementById('content').innerHTML = \`
+        <div class="grid">
+          <div class="card">
+            <div class="card-label">Paper Balance</div>
+            <div class="card-value neutral">$\${(data.balance || 200).toFixed(2)}</div>
+          </div>
+          <div class="card">
+            <div class="card-label">P&L</div>
+            <div class="card-value \${pnl > 0 ? 'positive' : pnl < 0 ? 'negative' : 'neutral'}">\${pnl >= 0 ? '+' : ''}$\${pnl.toFixed(2)}</div>
+          </div>
+          <div class="card">
+            <div class="card-label">Win Rate</div>
+            <div class="card-value neutral">\${data.wins || 0}/\${total}\${total > 0 ? ' (' + pct + '%)' : ''}</div>
+          </div>
+          <div class="card">
+            <div class="card-label">Runtime</div>
+            <div class="card-value neutral">\${hrs > 0 ? hrs + 'h ' : ''}\${mins}m</div>
+          </div>
+          <div class="card">
+            <div class="card-label">Open Positions</div>
+            <div class="card-value neutral">\${(data.positions || []).length}</div>
+          </div>
+          <div class="card">
+            <div class="card-label">Total Trades</div>
+            <div class="card-value neutral">\${total}</div>
+          </div>
+        </div>
+        
+        <div class="card full">
+          <div class="card-label">Trade History</div>
+          <div class="trades">\${tradesHtml}</div>
+        </div>
+      \`;
+    }
+    
+    load();
+  </script>
+</body>
+</html>
