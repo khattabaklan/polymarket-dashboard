@@ -1,1 +1,35 @@
-{"balance":200,"positions":[],"trades":[],"pnl":0,"wins":0,"losses":0}
+{
+  "balance": 162.2,
+  "positions": [
+    {
+      "tokenId": "38420318570277092513537996777845317528665956624474387536112905228696182856754",
+      "direction": "Down",
+      "shares": 35,
+      "entryPrice": 0.45,
+      "cost": 15.75,
+      "marketEnd": 1774395900000,
+      "conditionId": "0x2d72b58c52bf4e160be9ff13deae65a44e9763a3747ab9dfb063c1b019ddfd1a",
+      "marketTitle": "Bitcoin Up or Down - March 24, 7:40PM-7:45PM ET",
+      "entryTime": 1774395394718
+    },
+    {
+      "tokenId": "113274509529527305767854399388535893013867148337757850005280759243938605768276",
+      "direction": "Down",
+      "shares": 49,
+      "entryPrice": 0.45,
+      "cost": 22.05,
+      "marketEnd": 1774396200000,
+      "conditionId": "0x0761aa673c4167eb993cb8823988587069c906db7c287675bb94bee43ec85d39",
+      "marketTitle": "Bitcoin Up or Down - March 24, 7:45PM-7:50PM ET",
+      "entryTime": 1774395529921
+    }
+  ],
+  "trades": [],
+  "pnl": 0,
+  "wins": 0,
+  "losses": 0,
+  "startTime": 1774395249928,
+  "doubles": 0,
+  "peakBalance": 200,
+  "targetBalance": 1600
+}
