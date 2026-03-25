@@ -1,5 +1,5 @@
 {
-  "balance": 184.25,
+  "balance": 169.85,
   "positions": [
     {
       "tokenId": "113648147637404379552692793605702548149710525235774288190588945046810006867444",
@@ -11,6 +11,17 @@
       "conditionId": "0xb618107169b6360fbbdb97c57c2cbe20a3fa088c10d14a9f8843a2e970cbead4",
       "marketTitle": "Bitcoin Up or Down - March 25, 4:05AM-4:10AM ET",
       "entryTime": 1774425589967
+    },
+    {
+      "tokenId": "80818980255978410201186446639758513525764103297903124288878940310857334429709",
+      "direction": "Down",
+      "shares": 32,
+      "entryPrice": 0.45,
+      "cost": 14.4,
+      "marketEnd": 1774426500000,
+      "conditionId": "0x7222b31c7ef565e4a3650e188256683780b97eafa757df5c096579dac7579de3",
+      "marketTitle": "Bitcoin Up or Down - March 25, 4:10AM-4:15AM ET",
+      "entryTime": 1774426003853
     }
   ],
   "trades": [],
