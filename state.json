@@ -1,10 +1,25 @@
 {
-  "balance": 200,
-  "positions": [],
+  "balance": 176.15,
+  "positions": [
+    {
+      "tokenId": "31604114479466037044088652775245897027004035527558009477718640732399330686062",
+      "direction": "Down",
+      "shares": 53,
+      "entryPrice": 0.45,
+      "cost": 23.85,
+      "marketEnd": 1774414800000,
+      "conditionId": "0x1b7d1da66cf4690a3a4795038cf8cdea8d40029dee168e911a4b5f62fba48a90",
+      "marketTitle": "Bitcoin Up or Down - March 25, 12:55AM-1:00AM ET",
+      "entryTime": 1774414355528
+    }
+  ],
   "trades": [],
   "pnl": 0,
   "wins": 0,
   "losses": 0,
   "startTime": 1774414064000,
+  "doubles": 0,
+  "peakBalance": 200,
+  "targetBalance": 1600,
   "version": "v2-unlimited"
 }
