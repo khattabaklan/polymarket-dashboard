@@ -1,57 +1,14 @@
 {
-  "balance": 137.9,
-  "positions": [
-    {
-      "tokenId": "38420318570277092513537996777845317528665956624474387536112905228696182856754",
-      "direction": "Down",
-      "shares": 35,
-      "entryPrice": 0.45,
-      "cost": 15.75,
-      "marketEnd": 1774395900000,
-      "conditionId": "0x2d72b58c52bf4e160be9ff13deae65a44e9763a3747ab9dfb063c1b019ddfd1a",
-      "marketTitle": "Bitcoin Up or Down - March 24, 7:40PM-7:45PM ET",
-      "entryTime": 1774395394718
-    },
-    {
-      "tokenId": "113274509529527305767854399388535893013867148337757850005280759243938605768276",
-      "direction": "Down",
-      "shares": 49,
-      "entryPrice": 0.45,
-      "cost": 22.05,
-      "marketEnd": 1774396200000,
-      "conditionId": "0x0761aa673c4167eb993cb8823988587069c906db7c287675bb94bee43ec85d39",
-      "marketTitle": "Bitcoin Up or Down - March 24, 7:45PM-7:50PM ET",
-      "entryTime": 1774395529921
-    },
-    {
-      "tokenId": "95373260232892439583843656541733795236899533209294589514857611914909301216193",
-      "direction": "Down",
-      "shares": 28,
-      "entryPrice": 0.45,
-      "cost": 12.6,
-      "marketEnd": 1774396500000,
-      "conditionId": "0x83c1966d4b20b5c0bf60a6374c9752708c9fcd96d6c0203c6e2d0e18b90d162a",
-      "marketTitle": "Bitcoin Up or Down - March 24, 7:50PM-7:55PM ET",
-      "entryTime": 1774395850194
-    },
-    {
-      "tokenId": "103779202200079322018496720012535106688004830575840247656671354859313491980321",
-      "direction": "Up",
-      "shares": 26,
-      "entryPrice": 0.45,
-      "cost": 11.700000000000001,
-      "marketEnd": 1774396800000,
-      "conditionId": "0xdfcdfff5b8c5dc8d5074933806a63d3d108136835d7441da6e165e04d9c794fa",
-      "marketTitle": "Bitcoin Up or Down - March 24, 7:55PM-8:00PM ET",
-      "entryTime": 1774396359241
-    }
+  "balance": 249.90,
+  "positions": [],
+  "trades": [
+    {"direction": "Down", "shares": 35, "entryPrice": 0.45, "cost": 15.75, "payout": 35, "profit": 19.25, "won": true},
+    {"direction": "Down", "shares": 49, "entryPrice": 0.45, "cost": 22.05, "payout": 49, "profit": 26.95, "won": true},
+    {"direction": "Down", "shares": 28, "entryPrice": 0.45, "cost": 12.60, "payout": 28, "profit": 15.40, "won": true},
+    {"direction": "Up", "shares": 26, "entryPrice": 0.45, "cost": 11.70, "payout": 0, "profit": -11.70, "won": false}
   ],
-  "trades": [],
-  "pnl": 0,
-  "wins": 0,
-  "losses": 0,
-  "startTime": 1774395249928,
-  "doubles": 0,
-  "peakBalance": 200,
-  "targetBalance": 1600
+  "pnl": 49.90,
+  "wins": 3,
+  "losses": 1,
+  "startTime": 1774395249928
 }
