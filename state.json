@@ -1,14 +1,10 @@
 {
-  "balance": 249.90,
+  "balance": 200,
   "positions": [],
-  "trades": [
-    {"direction": "Down", "shares": 35, "entryPrice": 0.45, "cost": 15.75, "payout": 35, "profit": 19.25, "won": true},
-    {"direction": "Down", "shares": 49, "entryPrice": 0.45, "cost": 22.05, "payout": 49, "profit": 26.95, "won": true},
-    {"direction": "Down", "shares": 28, "entryPrice": 0.45, "cost": 12.60, "payout": 28, "profit": 15.40, "won": true},
-    {"direction": "Up", "shares": 26, "entryPrice": 0.45, "cost": 11.70, "payout": 0, "profit": -11.70, "won": false}
-  ],
-  "pnl": 49.90,
-  "wins": 3,
-  "losses": 1,
-  "startTime": 1774395249928
+  "trades": [],
+  "pnl": 0,
+  "wins": 0,
+  "losses": 0,
+  "startTime": 1774414064000,
+  "version": "v2-unlimited"
 }
